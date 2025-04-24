@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Home() {
 	return (
 		<>
-			<header className="max-w-[1450px] w-full h-[100vh] flex flex-row items-center justify-center gap-[32px] p-8 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+			<header className="max-w-[1450px] w-full h-[100vh] flex flex-row items-center justify-center gap-[32px] p-8 sm:p-20 font-[family-name:var(--font-geist-sans)] m-auto">
 				<div className="absolute bg-blue-800 backdrop-blur-xl w-full h-[150px] blur-[300px] top-0 left-0 "></div>
 				<div className="w-full m-0 text-start flex flex-col">
 					<h1 className="text-7xl text-start font-bold">
