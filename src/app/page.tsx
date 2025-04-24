@@ -1,84 +1,40 @@
-"use client"
-
-import { askAI } from "@/app/hooks/useAI"
-import { useState } from "react"
-import LoadingSpinner from "./components/loading-spinner"
-import GenerateIcon from "./components/generate-icon"
+import Link from "next/link";
 
 export default function Home() {
-	const [ingredients, setIngredients] = useState("")
-	const [recipes, setRecipes] = useState<string[]>([])
-	const [isLoading, setIsLoading] = useState<boolean>(false)
-	const [error, setError] = useState<string | null>(null)
-
-	async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-		event.preventDefault()
-		setError(null)
-		setRecipes([])
-		setIngredients("")
-
-		if (ingredients.length < 2) {
-			setError("No has introduit cap ingredient")
-
-			return
-		}
-		setIsLoading(true)
-		const request = await askAI({ ingredients })
-
-		if (request) {
-      new Promise((resolve) => setTimeout(resolve, 500))
-			setIsLoading(false)
-			setRecipes(request)
-		}
-	}
 	return (
-		<div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-			<main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start w-full max-w-[720px]">
-				<h1 className="text-5xl font-bold text-center w-full">CUINER IA</h1>
-
-				<form
-					onSubmit={handleSubmit}
-					className="w-full flex gap-[20px] max-w-[500px] m-auto"
-				>
-					<input
-						type="text"
-						placeholder="Els teus ingredients (ous, pollastre, patata...)"
-						onChange={(e) => setIngredients(e.target.value)}
-						value={ingredients}
-						className="w-full p-3 outline-0 border-2 border-white rounded-md"
-					/>
-					{isLoading ? (
-						<button className="flex gap-[10px] w-[200px] text-gray-400 m-auto text-center bg-gray-900 p-3 rounded-md" disabled>
-							<LoadingSpinner />
-							<span>Cuinant...</span>
-						</button>
-					) : (
-						<button className="w-[200px] bg-blue-600 p-3 rounded-md flex gap-[10px] text-center m-auto cursor-pointer">
-              <GenerateIcon />
-              <span>Generar</span>
-						</button>
-					)}
-				</form>
-
-				<div className="w-full">
-					{error !== null
-						? error
-						: recipes.map((recipe, index) => (
-								<div
-									key={index}
-									className="bg-black p-4 rounded-md shadow-md mb-4"
-								>
-									<h2 className="text-xl font-bold">
-										Recepta {index + 1}
-									</h2>
-									<p className="mt-2">{recipe}</p>
-								</div>
-						  ))}
+		<>
+			<header className="max-w-[1450px] w-full h-[100vh] flex flex-row items-center justify-center gap-[32px] p-8 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+				<div className="absolute bg-blue-800 backdrop-blur-xl w-full h-[150px] blur-[300px] top-0 left-0 "></div>
+				<div className="w-full m-0 text-start flex flex-col">
+					<h1 className="text-7xl text-start font-bold">
+						L&apos;IA per a{" "}
+						<span className="bg-clip-text from-violet-600 to-violet-400 bg-gradient-to-r text-transparent">
+							cuiners
+						</span>
+					</h1>
+					<p className="text-start w-full py-5 max-w-xl text-gray-400">
+						Cuina com un expert seguint els passos d&apos;una recepta generada
+						per la intel·ligència artificial.
+					</p>
+					<Link
+						href="/chat"
+						className="bg-gradient-to-r from-blue-700 to-blue-500 w-fit py-3 px-6 rounded-full"
+					>
+						Consulta infinites receptes
+					</Link>
+                    
 				</div>
+				<div>
+					<img
+						src="/cuiner-ia.avif"
+						className="border-2 border-blue-500 rounded-2xl shadow-md shadow-blue-700"
+						alt="IA per a cuiners"
+					/>
+				</div>
+			</header>
+			<main>
+				<h2></h2>
 			</main>
-			<footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-				Fet per Erik Moreno
-			</footer>
-		</div>
+		</>
 	)
 }
