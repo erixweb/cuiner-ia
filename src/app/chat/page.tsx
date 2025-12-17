@@ -26,7 +26,7 @@ export default function Chat() {
 		const request = await askAI({ ingredients })
 
 		if (request) {
-      new Promise((resolve) => setTimeout(resolve, 500))
+			new Promise((resolve) => setTimeout(resolve, 500))
 			setIsLoading(false)
 			setRecipes(request)
 		}
@@ -48,14 +48,17 @@ export default function Chat() {
 						className="w-full p-3 outline-0 rounded-full"
 					/>
 					{isLoading ? (
-						<button className="flex gap-[10px] w-[200px] text-gray-400 m-auto text-center bg-gray-900 p-3 rounded-full" disabled>
+						<button
+							className="flex gap-[10px] w-[200px] text-gray-400 m-auto text-center bg-gray-900 p-3 rounded-full"
+							disabled
+						>
 							<LoadingSpinner />
 							<span>Cuinant...</span>
 						</button>
 					) : (
 						<button className="w-[200px] bg-blue-600 p-3 rounded-full flex gap-[10px] text-center m-auto cursor-pointer">
-              <GenerateIcon />
-              <span>Generar</span>
+							<GenerateIcon />
+							<span>Generar</span>
 						</button>
 					)}
 				</form>
